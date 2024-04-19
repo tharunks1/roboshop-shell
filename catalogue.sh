@@ -1,5 +1,5 @@
 #!/bin/bash
-LOGDIR=/home/centos/shell_script
+LOGDIR=/home/centos/Shell_script
 SCRIPT_NAME=$0
 DATE=$(date +%F)
 LOGFILE=$LOGDIR/$SCRIPT_NAME-$DATE.log
@@ -62,7 +62,7 @@ npm install
 
 VALIDATE $? "Installing NPM dependencies" &>>$LOGFILE
 
-cp /home/centos/shell-script/catalogue.service /etc/systemd/system/catalogue.service
+cp /home/centos/Shell-script/catalogue.service /etc/systemd/system/catalogue.service
 
 VALIDATE $? "Copying the catalogue.service" &>>$LOGFILE
 
@@ -78,7 +78,7 @@ systemctl start catalogue
 
 VALIDATE $? "Starting the catalogue" &>>$LOGFILE
 
-cp /home/centos/shell-script/mongo.repo /etc/yum.repos.d/mongo.repo
+cp /home/centos/Shell-script/mongo.repo /etc/yum.repos.d/mongo.repo
 
 VALIDATE $? "Copying mongo.repo" &>>$LOGFILE
 
