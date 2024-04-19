@@ -26,32 +26,32 @@ VALIDATE()
     fi
 }
 
-yum install nginx -y &>>$$LOGFILE
+yum install nginx -y &>>$LOGFILE
 
 VALIDATE $? "Installing Nginx" 
 
-systemctl enable nginx  &>>$$LOGFILE
+systemctl enable nginx  &>>$LOGFILE
 
 VALIDATE $? "Enabling Nginx"
 
-systemctl start nginx &>>$$LOGFILE
+systemctl start nginx &>>$LOGFILE
 
 VALIDATE $? "Starting Nginx" 
 
 
-rm -rf /usr/share/nginx/html/* &>>$$LOGFILE
+rm -rf /usr/share/nginx/html/* &>>$LOGFILE
 
 VALIDATE $? "Removing the Default content in the directory" 
 
-curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>>$$LOGFILE
+curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>>$LOGFILE
 
 VALIDATE $? "Downloading the Web.zip " 
 
-cd /usr/share/nginx/html &>>$$LOGFILE
+cd /usr/share/nginx/html &>>$LOGFILE
  
 VALIDATE $? "Switching to the directory" 
 
-unzip /tmp/web.zip &>>$$LOGFILE
+unzip /tmp/web.zip &>>$LOGFILE
 
 VALIDATE $? "Unziping web.zip" 
 
@@ -59,6 +59,6 @@ cp /home/centos/roboshop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf
 
 VALIDATE $? "Creating Nginx Reverse Proxy Config" 
 
-systemctl restart nginx &>>$$LOGFILE
+systemctl restart nginx &>>$LOGFILE
 
 VALIDATE $? "Restarting Nginx"
