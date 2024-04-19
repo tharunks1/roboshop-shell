@@ -20,40 +20,45 @@ VALIDATE()
     if [ $1 -ne 0 ];
     then
         echo -e "$2 $R Installation Failure $N"
+        exit 1
     else
         echo -e "$2 $G Installation Success $N"
     fi
 }
 
-yum install nginx -y
+yum install nginx -y &>>$LOGFILE
 
-VALIDATE $? "Installing Nginx" &>>LOGFILE
+VALIDATE $? "Installing Nginx" 
 
-systemctl enable nginx
+systemctl enable nginx  &>>$LOGFILE
 
-VALIDATE $? "Enabling Nginx" &>>LOGFILE
+VALIDATE $? "Enabling Nginx"
 
-systemctl start nginx
+systemctl start nginx &>>$LOGFILE
 
-VALIDATE $? "Starting Nginx" &>>LOGFILE
+VALIDATE $? "Starting Nginx" 
 
 
-rm -rf /usr/share/nginx/html/*
+rm -rf /usr/share/nginx/html/* &>>$LOGFILE
 
-VALIDATE $? "Removing the Default content in the directory" &>>LOGFILE
+VALIDATE $? "Removing the Default content in the directory" 
 
-curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip
+curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>>$LOGFILE
 
-VALIDATE $? "Downloading the Web.zip " &>>LOGFILE
+VALIDATE $? "Downloading the Web.zip " 
 
-cd /usr/share/nginx/html
+cd /usr/share/nginx/html &>>$LOGFILE
+ 
+VALIDATE $? "Switching to the directory" 
 
-VALIDATE $? "Switching to the directory" &>>LOGFILE
+unzip /tmp/web.zip &>>$LOGFILE
 
-unzip /tmp/web.zip
+VALIDATE $? "Unziping web.zip" 
 
-VALIDATE $? "Unziping web.zip" &>>LOGFILE
+cp /home/centos/roboshop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf 
 
-systemctl restart nginx 
+VALIDATE $? "Creating Nginx Reverse Proxy Config" 
 
-VALIDATE $? "Restarting Nginx" &>>LOGFILE
+systemctl restart nginx &>>$LOGFILE
+
+VALIDATE $? "Restarting Nginx"
