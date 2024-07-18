@@ -59,7 +59,7 @@ unzip -o /tmp/shipping.zip &>> $LOGFILE
 VALIDATE $? "Unzipping the shipping.zip "
 
 
-cd /app  $>> $LOGFILE
+cd /app  
 
 VALIDATE $? "switching to app directory"
 
@@ -91,7 +91,7 @@ dnf install mysql -y &>> $LOGFILE
 
 VALIDATE $? "Installing Mysql" 
 
-mysql -h mysql.chittirobo.shop -uroot -pRoboShop@1 < /app/schema/shipping.sql  &>> $LOGFILE
+mysql -h mysql.chittirobo.shop -uroot -pRoboShop@1 < /app/schema/shipping.sql  
 
 VALIDATE $? "Loading the schema"
 
