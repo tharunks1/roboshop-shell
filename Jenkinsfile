@@ -15,6 +15,15 @@ pipeline {
                """
             }
         }
+
+         stage('Hi') {
+            steps {
+               sh """ 
+               echo "Hello I'm tharun"
+               
+               """
+            }
+        }
         
        
     }
