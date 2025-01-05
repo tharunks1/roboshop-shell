@@ -4,9 +4,7 @@ pipeline {
         label 'LABEL-1'
     }
 }
- environment {
-     
- }
+
 
     stages {
         stage('Hello') {
