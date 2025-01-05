@@ -10,7 +10,7 @@ pipeline {
         stage('Hello') {
             steps {
                sh """ 
-               echo "Hello I'm tharun
+               echo "Hello I'm tharun"
                
                """
             }
